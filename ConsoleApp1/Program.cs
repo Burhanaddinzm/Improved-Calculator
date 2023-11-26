@@ -13,14 +13,20 @@ public class Calculator
     {
         Menu();
         string request = Console.ReadLine();
-        while (request != "0") 
+        while (request != "0")
         {
+            Console.ResetColor();
             switch (request)
             {
                 case "1":
                     Calculate();
                     break;
+                default:
+                    resultColor(true);
+                    Console.WriteLine("Invalid Option!");
+                    break;
             }
+            Console.ResetColor();
             Menu();
             request = Console.ReadLine();
         }
@@ -78,26 +84,36 @@ public class Calculator
                         }
                         else
                         {
+                            resultColor(true);
                             Console.WriteLine("Error: Division by zero.");
                             return;
                         }
                         break;
                     default:
+                        resultColor(true);
                         Console.WriteLine("Error: Unsupported operator.");
                         return;
                 }
-
+                resultColor(false);
                 Console.WriteLine($"{num1} {op} {num2} = {result}");
             }
             else
             {
+                resultColor(true);
                 Console.WriteLine("Error: Unable to parse numbers.");
             }
         }
         else
         {
+            resultColor(true);
             Console.WriteLine("No operator found in the input.");
         }
     }
-
+    void resultColor(bool b)
+    {
+        if (b)
+            Console.ForegroundColor = ConsoleColor.Red;
+        else
+            Console.ForegroundColor = ConsoleColor.Green;
+    }
 }
